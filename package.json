@@ -1,0 +1,16 @@
+{
+  "name": "job-hunt",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/main.ts",
+    "reset": "rm -f data/jobs.db data/jobs.db-journal && echo 'Database reset.'"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^5.2.5"
+  },
+  "devDependencies": {
+    "bun-types": "^1.3.13"
+  }
+}

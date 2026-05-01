@@ -1,0 +1,12 @@
+# mise managed tools
+[tools]
+bun = "latest"
+
+# Environment variables
+[env]
+OLLAMA_MODEL = "gemma4:e4b"
+OLLAMA_URL = "http://localhost:11434"
+SCORE_THRESHOLD = "6"
+DB_PATH = "data/jobs.db"
+CV_PATH = "doc/CV-Lucas_Mbiwe.pdf"
+MIN_SALARY_USD = "75000"
