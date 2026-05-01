@@ -5,7 +5,7 @@ const env = (key: string, fallback: string): string =>
 
 export const config = {
   /** GLM model name (z.ai). */
-  glmModel: env("GLM_MODEL", "glm-4-air"),
+  glmModel: env("GLM_MODEL", "glm-4.5-air"),
 
   /** GLM API base URL (OpenAI-compatible). */
   glmBaseUrl: env("GLM_BASE_URL", "https://api.z.ai/api/paas/v4"),
