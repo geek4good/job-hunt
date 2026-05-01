@@ -10,3 +10,12 @@ SCORE_THRESHOLD = "6"
 DB_PATH = "data/jobs.db"
 CV_PATH = "doc/CV-Lucas_Mbiwe.pdf"
 MIN_SALARY_USD = "75000"
+
+# Tasks
+[tasks.start]
+description = "Run the job-hunt agent"
+run = "bun run src/main.ts"
+
+[tasks.reset]
+description = "Reset the dedup database"
+run = "rm -f data/jobs.db data/jobs.db-journal && echo 'Database reset.'"
