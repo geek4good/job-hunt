@@ -8,7 +8,7 @@ export const config = {
   glmModel: env("GLM_MODEL", "glm-4-air"),
 
   /** GLM API base URL (OpenAI-compatible). */
-  glmBaseUrl: env("GLM_BASE_URL", "https://open.bigmodel.cn/api/paas/v4"),
+  glmBaseUrl: env("GLM_BASE_URL", "https://api.z.ai/api/paas/v4"),
 
   /** GLM API key — set via GLM_API_KEY env var. */
   glmApiKey: env("GLM_API_KEY", ""),

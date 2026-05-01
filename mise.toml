@@ -5,7 +5,7 @@ bun = "latest"
 # Environment variables
 [env]
 GLM_MODEL = "glm-4-air"
-GLM_BASE_URL = "https://open.bigmodel.cn/api/paas/v4"
+GLM_BASE_URL = "https://api.z.ai/api/paas/v4"
 SCORE_THRESHOLD = "6"
 DB_PATH = "data/jobs.db"
 CV_PATH = "doc/cv.pdf"
