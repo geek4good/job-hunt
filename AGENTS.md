@@ -92,7 +92,7 @@ All values come from env vars. Defaults shown below.
 | Env var | Default | Notes |
 |---|---|---|
 | `GLM_MODEL` | `glm-4.5-air` | z.ai model name |
-| `GLM_BASE_URL` | `https://api.z.ai/api/paas/v4` | OpenAI-compatible base |
+| `GLM_BASE_URL` | `https://api.z.ai/api/coding/paas/v4` | OpenAI-compatible base |
 | `GLM_API_KEY` | `""` | Required for scoring; set in shell or .env |
 | `SCORE_THRESHOLD` | `6` | 0-10; jobs below this are rejected |
 | `DB_PATH` | `data/jobs.db` | SQLite dedup database |

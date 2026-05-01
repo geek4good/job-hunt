@@ -56,7 +56,7 @@ All config is driven by environment variables. Defaults are set in `mise.toml`.
 |---|---|---|
 | `GLM_API_KEY` | _(required)_ | z.ai API key |
 | `GLM_MODEL` | `glm-4.5-air` | Model name |
-| `GLM_BASE_URL` | `https://api.z.ai/api/paas/v4` | API base URL |
+| `GLM_BASE_URL` | `https://api.z.ai/api/coding/paas/v4` | API base URL |
 | `SCORE_THRESHOLD` | `6` | Minimum score (0–10) to accept a job |
 | `MIN_SALARY_USD` | `65000` | Full-time annual salary floor |
 | `MIN_DAY_RATE_USD` | `300` | Freelance/contract day rate floor (~$37.50/hr) |
