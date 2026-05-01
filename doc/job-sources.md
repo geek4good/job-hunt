@@ -513,7 +513,10 @@ RSS exists but is primarily an embed widget. Unclean feed.
 | 🟡 Medium  | Working Nomads          | JSON API (POST)    | Medium     | Requires POST request                         |
 | 🟡 Medium  | Careerjet               | REST API (JSON/XML)| Medium     | Free API key required                         |
 | 🟡 Medium  | Welcome to the Jungle   | REST API           | Medium     | Requires auth token (request form)            |
-| 🟡 Medium  | Upwork                  | GraphQL API + RSS  | Medium     | Requires OAuth, freelance only                |
+| 🟡 Medium  | Upwork                  | GraphQL API + RSS  | Medium     | Requires OAuth, strong freelance market       |
+| 🟡 Medium  | PeoplePerHour           | Scrape             | Medium     | UK-first freelance marketplace                |
+| 🟡 Medium  | Contra                  | Scrape             | Medium     | Commission-free freelance network             |
+| 🟡 Medium  | Truelancer              | Scrape             | Medium     | Freelance marketplace                         |
 | 🟡 Medium  | Remote100K              | Scrape             | Medium     | $100K+ remote jobs, clean listing pages       |
 | 🟡 Medium  | Jobspresso              | Scrape             | Medium     | Curated remote, simple HTML structure         |
 | 🟡 Medium  | Dynamite Jobs           | Scrape             | Medium     | Remote-first, clean listing pages             |
@@ -551,9 +554,6 @@ job-hunt agent.
 | Kijiji          | Classifieds, not remote-focused                 |
 | Snagajob        | US hourly/part-time only                        |
 | Comparably      | Match-based, not browseable                     |
-| PeoplePerHour   | Freelance marketplace, not full-time roles      |
-| Contra          | Freelance network, not full-time roles          |
-| Truelancer      | Freelance marketplace, not full-time roles      |
 | Worksome        | Enterprise FMS, not a job board                 |
 | CareerBuilder UK| UK generalist, not remote-focused               |
 | Jooble France   | French aggregator, not remote-focused           |
