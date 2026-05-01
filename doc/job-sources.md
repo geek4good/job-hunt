@@ -4,9 +4,9 @@ _Last updated: 2026-05-01_
 
 ---
 
-## From LinkedIn Post (23 platforms)
+## 1. LinkedIn Post — Remote-Focused Platforms (22)
 
-### 1. Peerlist
+### 1.1 Peerlist
 
 | Format   | URL                       |
 | -------- | ------------------------- |
@@ -16,7 +16,7 @@ Startup & remote jobs board. No public API/RSS.
 
 ---
 
-### 2. Comparably
+### 1.2 Comparably
 
 | Format   | URL                                       |
 | -------- | ----------------------------------------- |
@@ -26,7 +26,7 @@ Employer branding / salary transparency platform. Companies browse & match. No p
 
 ---
 
-### 3. PeoplePerHour
+### 1.3 PeoplePerHour
 
 | Format   | URL                              |
 | -------- | -------------------------------- |
@@ -36,7 +36,7 @@ UK-first freelance marketplace. Project-based, not full-time roles. No public AP
 
 ---
 
-### 4. Contra
+### 1.4 Contra
 
 | Format   | URL                                  |
 | -------- | ------------------------------------ |
@@ -47,7 +47,7 @@ Commission-free freelance network. No public API/RSS.
 
 ---
 
-### 5. Truelancer
+### 1.5 Truelancer
 
 | Format   | URL                               |
 | -------- | --------------------------------- |
@@ -57,7 +57,7 @@ Freelance marketplace (Fiverr/Upwork style). No public API/RSS.
 
 ---
 
-### 6. Worksome
+### 1.6 Worksome
 
 | Format   | URL                            |
 | -------- | ------------------------------ |
@@ -67,7 +67,7 @@ Freelance Management System for enterprises. Not a job board per se. No public A
 
 ---
 
-### 7. CareerBuilder UK
+### 1.7 CareerBuilder UK
 
 | Format   | URL                                  |
 | -------- | ------------------------------------ |
@@ -77,7 +77,7 @@ UK generalist job board. Not remote-focused. No public API/RSS.
 
 ---
 
-### 8. Jooble France
+### 1.8 Jooble France
 
 | Format   | URL                            |
 | -------- | ------------------------------ |
@@ -87,7 +87,7 @@ French job search aggregator (meta-search). Not remote-focused. No public API/RS
 
 ---
 
-### 9. JustRemotechJobs
+### 1.9 JustRemotechJobs
 
 | Format   | URL                            |
 | -------- | ------------------------------ |
@@ -97,7 +97,7 @@ Remote tech jobs board. No public API/RSS (requires scraping).
 
 ---
 
-### 10. Remote (remote.com)
+### 1.10 Remote (remote.com)
 
 | Format   | URL                                    |
 | -------- | -------------------------------------- |
@@ -107,7 +107,7 @@ Global HR/payroll platform. Has a job board for roles at companies using Remote.
 
 ---
 
-### 11. Hiredly
+### 1.11 Hiredly
 
 | Format   | URL                            |
 | -------- | ------------------------------ |
@@ -117,7 +117,7 @@ Malaysia-focused job board. Not remote-focused. No public API/RSS.
 
 ---
 
-### 12. Remote100K
+### 1.12 Remote100K
 
 | Format   | URL                            |
 | -------- | ------------------------------ |
@@ -127,7 +127,7 @@ Remote jobs paying $100K+ USD. Curated, apply directly. No public API/RSS.
 
 ---
 
-### 13. We Work Remotely ✅ (already integrated)
+### 1.13 We Work Remotely ✅ (already integrated)
 
 | Format   | URL                                                       |
 | -------- | --------------------------------------------------------- |
@@ -137,7 +137,7 @@ Remote jobs paying $100K+ USD. Curated, apply directly. No public API/RSS.
 
 ---
 
-### 14. RemoteOK
+### 1.14 RemoteOK
 
 | Format   | URL                                    |
 | -------- | -------------------------------------- |
@@ -149,7 +149,7 @@ No auth needed. Add `User-Agent` header and credit them.
 
 ---
 
-### 15. Remotive
+### 1.15 Remotive
 
 | Format   | URL                                            |
 | -------- | ---------------------------------------------- |
@@ -162,7 +162,7 @@ Public, no auth. Link back to Remotive in output.
 
 ---
 
-### 16. Jobspresso
+### 1.16 Jobspresso
 
 | Format   | URL                                      |
 | -------- | ---------------------------------------- |
@@ -172,7 +172,7 @@ Curated remote jobs (tech, marketing, support). No public API/RSS.
 
 ---
 
-### 17. Dynamite Jobs
+### 1.17 Dynamite Jobs
 
 | Format   | URL                                        |
 | -------- | ------------------------------------------ |
@@ -182,7 +182,7 @@ Remote-first job board. 100% verified remote roles. No public API/RSS.
 
 ---
 
-### 18. Working Nomads
+### 1.18 Working Nomads
 
 | Format     | URL                                                    |
 | ---------- | ------------------------------------------------------ |
@@ -192,7 +192,7 @@ Remote-first job board. 100% verified remote roles. No public API/RSS.
 
 ---
 
-### 19. Himalayas 🌟
+### 1.19 Himalayas 🌟
 
 | Format   | URL                                        |
 | -------- | ------------------------------------------ |
@@ -205,7 +205,7 @@ Free public JSON API + RSS. No auth. Search by keyword, country, seniority, time
 
 ---
 
-### 20. RemoteSource
+### 1.20 RemoteSource
 
 | Format   | URL                                      |
 | -------- | ---------------------------------------- |
@@ -215,7 +215,7 @@ Free public JSON API + RSS. No auth. Search by keyword, country, seniority, time
 
 ---
 
-### 21. No Visa Jobs
+### 1.21 No Visa Jobs
 
 | Format   | URL                            |
 | -------- | ------------------------------ |
@@ -225,7 +225,7 @@ Remote jobs that don't require US/EU/UK visas. Pay-as-you-wish. Currently in hia
 
 ---
 
-### 22. WorldTeams
+### 1.22 WorldTeams
 
 | Format   | URL                                        |
 | -------- | ------------------------------------------ |
@@ -235,9 +235,231 @@ Remote jobs for LATAM talent working with US companies. No public API/RSS.
 
 ---
 
-## Previously Researched — Additional Sources
+## 2. LinkedIn Image — Generalist & Traditional Job Boards (20)
 
-### Jobicy
+### 2.1 Indeed
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| API      | `https://apis.indeed.com/graphql`      |
+| Docs     | https://opensource.indeedeng.io/api-documentation/ |
+| Website  | https://www.indeed.com                 |
+
+World's largest job site. API is partner-focused (GraphQL). Requires publisher account. No simple public RSS.
+
+---
+
+### 2.2 Glassdoor
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| API      | `https://api.glassdoor.com/api/api.htm`|
+| Docs     | https://www.glassdoor.com/developer/index.htm |
+| Website  | https://www.glassdoor.com              |
+
+REST API (JSON). Requires partner ID + API key. Jobs API has limited public access; full access requires partnership.
+
+---
+
+### 2.3 Workopolis
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| Website  | https://www.workopolis.com/            |
+
+⚠️ **Shut down.** Acquired by Indeed in 2018. Now a white-label portal for Indeed Canada. Not usable as an independent source.
+
+---
+
+### 2.4 Eluta.ca
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| XML API  | `https://www.eluta.ca/elutaxml`        |
+| Website  | https://eluta.ca/                      |
+
+Canadian job search engine. Has an XML API for publishers. Not remote-focused. Canada-only.
+
+---
+
+### 2.5 JobBank Canada
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| RSS      | Available via search (see below)       |
+| Website  | https://www.jobbank.gc.ca/jobsearch/   |
+
+Official Canadian government job board. RSS feeds available via search result pages. Not remote-focused. Canada-only.
+
+---
+
+### 2.6 Monster
+
+| Format   | URL                                            |
+| -------- | ---------------------------------------------- |
+| API      | `https://api.jobs.com/v3/search/jobs`          |
+| RSS      | Available via search (last 24h only)            |
+| Docs     | https://partner.monster.com/job-search         |
+| Website  | https://www.monster.com                        |
+
+Major global job board. Partner API available. RSS feed only covers last 24 hours. Not remote-focused.
+
+---
+
+### 2.7 SimplyHired
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| API      | Via Techmap (`portal=simplyhired`)     |
+| Website  | https://www.simplyhired.com            |
+
+Job search engine. No direct public API. Accessible via Techmap's Job Postings API (paid, with free tier). Not remote-focused.
+
+---
+
+### 2.8 Jobboom
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| Website  | https://www.jobboom.com/               |
+
+Québec-focused job board (French-language). No public API/RSS. Canada/Québec only.
+
+---
+
+### 2.9 Jobilico
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| API      | `https://www.jobillico.com/api/info`   |
+| Docs     | https://www.jobillico.com/api/help/jobillico-api |
+| Website  | https://www.jobillico.com              |
+
+Canadian job board. Has an API for employers to post jobs (not for job seekers to search). Not remote-focused.
+
+---
+
+### 2.10 FlexJobs
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| Website  | https://www.flexjobs.com/remote-jobs   |
+
+Paid subscription remote/flexible job board. Hand-screened listings. No public API/RSS. Requires scraping (behind paywall).
+
+---
+
+### 2.11 Talent.com
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| Website  | https://www.talent.com                 |
+| Publishers | https://www.talent.com/publishers    |
+
+Global job search engine (77 countries). XML feed integrations for employers. No public job seeker API/RSS. Not remote-focused.
+
+---
+
+### 2.12 TalentEgg
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| Website  | https://talentegg.ca/                  |
+
+Canadian job board for students, grads, and early-career professionals. No public API/RSS. Not remote-focused.
+
+---
+
+### 2.13 CareerBuilder
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| Website  | https://www.careerbuilder.com/         |
+
+Major global job board. Has partner APIs for employers. No public job seeker API/RSS. Not remote-focused.
+
+---
+
+### 2.14 Robert Half
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| Website  | https://www.roberthalf.com/us/en/find-jobs |
+
+Staffing/recruitment firm specializing in finance, tech, marketing, legal, admin. Job board for their placements. No public API/RSS. Not remote-focused.
+
+---
+
+### 2.15 Kijiji
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| Website  | https://www.kijiji.ca/                 |
+
+Canadian classifieds (eBay subsidiary). Has a jobs section. No public API/RSS for jobs. Not remote-focused.
+
+---
+
+### 2.16 Snagajob
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| Website  | https://www.snagajob.com/              |
+
+US hourly/part-time job marketplace. No public job seeker API/RSS. Not remote-focused. Hourly roles only.
+
+---
+
+### 2.17 Dice
+
+| Format   | URL                                    |
+| -------- | -------------------------------------- |
+| Website  | https://www.dice.com/                  |
+
+Tech-focused US job board. No public API/RSS. Requires scraping or Apify third-party scrapers. Good for tech roles but not remote-focused.
+
+---
+
+### 2.18 Upwork
+
+| Format   | URL                                        |
+| -------- | ------------------------------------------ |
+| API      | `https://api.upwork.com/graphql`           |
+| RSS      | Available (search-based feeds)              |
+| Docs     | https://developer.upwork.com/              |
+| Website  | https://www.upwork.com                     |
+
+Freelance marketplace. Has GraphQL API + RSS feeds. Requires OAuth for API. Freelance/project-based, not full-time roles.
+
+---
+
+### 2.19 Careerjet
+
+| Format   | URL                                              |
+| -------- | ------------------------------------------------ |
+| API      | `https://search.api.careerjet.net/v4/query`      |
+| Docs     | https://www.careerjet.com/partners/api            |
+| Website  | https://www.careerjet.com                        |
+
+Job search aggregator. Partner API (JSON/XML). Requires API key (free). Multi-country. Not remote-focused.
+
+---
+
+### 2.20 Welcome to the Jungle (WTTJ)
+
+| Format   | URL                                                    |
+| -------- | ------------------------------------------------------ |
+| API      | `https://www.welcomekit.co/api/v1/external/jobs/all`   |
+| Docs     | https://developers.welcomekit.co/                      |
+| Website  | https://www.welcometothejungle.com                     |
+
+French/European job board (expanding globally). Has a REST API. Requires auth token (request via form). Good tech listings. Not remote-focused.
+
+---
+
+## 3. Previously Researched — Additional Sources
+
+### 3.1 Jobicy
 
 | Format   | URL                                            |
 | -------- | ---------------------------------------------- |
@@ -249,7 +471,7 @@ Free public API. Filter by geo, industry, tag. No auth.
 
 ---
 
-### Hacker News — "Who is Hiring?"
+### 3.2 Hacker News — "Who is Hiring?"
 
 | Format                | URL                                                                                   |
 | --------------------- | ------------------------------------------------------------------------------------- |
@@ -262,7 +484,7 @@ No RSS. Monthly text thread — requires Algolia API + comment parsing. High-qua
 
 ---
 
-### Europe Remotely (EU Remote Jobs)
+### 3.3 Europe Remotely (EU Remote Jobs)
 
 | Format | URL                                                    |
 | ------ | ------------------------------------------------------ |
@@ -275,30 +497,57 @@ RSS exists but is primarily an embed widget. Unclean feed.
 
 ## Integration Difficulty Summary
 
-| Priority     | Source            | Difficulty | Feed Type           | Notes                                       |
-| ------------ | ----------------- | ---------- | ------------------- | ------------------------------------------- |
-| ✅ Done       | WWR               | —          | RSS                 | Already integrated                          |
-| 🟢 Easy      | RemoteOK          | Easy       | JSON API + RSS      | No auth, high volume                        |
-| 🟢 Easy      | Remotive          | Easy       | JSON API + XML      | No auth                                     |
-| 🟢 Easy      | Himalayas         | Easy       | JSON API + RSS      | No auth, excellent docs, searchable         |
-| 🟢 Easy      | Jobicy            | Easy       | JSON API + RSS      | No auth, filterable                         |
-| 🟡 Medium    | Working Nomads    | Medium     | JSON API (POST)     | Requires POST request                       |
-| 🔴 Hard      | HN Who's Hiring   | Hard       | None (Algolia API)  | Comment parsing required                    |
-| 🔴 Hard      | JustRemote        | Hard       | None                | Scraping only                               |
-| 🔴 Hard      | Europe Remotely   | Hard       | Unclean RSS         | Widget-embedded feed                        |
-| ⚪ No Feed   | Peerlist          | —          | None                | No API/RSS                                  |
-| ⚪ No Feed   | Comparably        | —          | None                | Match-based, not browseable                 |
-| ⚪ No Feed   | PeoplePerHour     | —          | None                | Freelance marketplace                       |
-| ⚪ No Feed   | Contra            | —          | None                | Freelance network                           |
-| ⚪ No Feed   | Truelancer        | —          | None                | Freelance marketplace                       |
-| ⚪ No Feed   | Worksome          | —          | None                | Enterprise FMS, not a job board             |
-| ⚪ No Feed   | CareerBuilder UK  | —          | None                | UK generalist, not remote-focused           |
-| ⚪ No Feed   | Jooble France     | —          | None                | French aggregator, not remote-focused       |
-| ⚪ No Feed   | Remote.com        | —          | None                | HR/payroll platform                         |
-| ⚪ No Feed   | Hiredly           | —          | None                | Malaysia-focused                            |
-| ⚪ No Feed   | Remote100K        | —          | None                | $100K+ remote, curated                      |
-| ⚪ No Feed   | Jobspresso        | —          | None                | Curated remote, no API                      |
-| ⚪ No Feed   | Dynamite Jobs     | —          | None                | Remote-first, no API                        |
-| ⚪ No Feed   | RemoteSource      | —          | None                | 100% remote, no API                         |
-| ⚪ No Feed   | No Visa Jobs      | —          | None                | In hiatus / rebuilding                      |
-| ⚪ No Feed   | WorldTeams        | —          | None                | LATAM → US, no API                          |
+### Has Feed / API — Candidates for Agent Integration
+
+| Priority     | Source                    | Difficulty | Feed Type           | Notes                                       |
+| ------------ | ------------------------- | ---------- | ------------------- | ------------------------------------------- |
+| ✅ Done       | WWR                       | —          | RSS                 | Already integrated                          |
+| 🟢 Easy      | RemoteOK                  | Easy       | JSON API + RSS      | No auth, high volume                        |
+| 🟢 Easy      | Remotive                  | Easy       | JSON API + XML      | No auth                                     |
+| 🟢 Easy      | Himalayas                 | Easy       | JSON API + RSS      | No auth, excellent docs, searchable         |
+| 🟢 Easy      | Jobicy                    | Easy       | JSON API + RSS      | No auth, filterable                         |
+| 🟡 Medium    | Working Nomads            | Medium     | JSON API (POST)     | Requires POST request                       |
+| 🟡 Medium    | Upwork                    | Medium     | GraphQL API + RSS   | Requires OAuth, freelance only              |
+| 🟡 Medium    | Careerjet                 | Medium     | REST API (JSON/XML) | Free API key required                       |
+| 🟡 Medium    | Welcome to the Jungle     | Medium     | REST API            | Requires auth token (request form)          |
+| 🔴 Hard      | HN Who's Hiring           | Hard       | None (Algolia API)  | Comment parsing required                    |
+| 🔴 Hard      | JustRemote                | Hard       | None                | Scraping only                               |
+| 🔴 Hard      | Europe Remotely           | Hard       | Unclean RSS         | Widget-embedded feed                        |
+
+### No Feed / Low Relevance
+
+| Source          | Notes                                           |
+| --------------- | ----------------------------------------------- |
+| Indeed          | Partner API only (GraphQL), not remote-focused  |
+| Glassdoor       | Partner API only, requires key                  |
+| Workopolis      | **Shut down** — acquired by Indeed (2018)       |
+| Eluta.ca        | XML API, Canada-only, not remote-focused        |
+| JobBank Canada  | RSS exists, Canada-only, not remote-focused     |
+| Monster         | Partner API, RSS last 24h only                  |
+| SimplyHired     | No public API (via Techmap only)                |
+| Jobboom         | Québec-only, no API                             |
+| Jobilico        | Employer API only, not remote-focused           |
+| FlexJobs        | Paywall, no API/RSS                             |
+| Talent.com      | No public API/RSS                               |
+| TalentEgg       | Canada students/grads, no API                   |
+| CareerBuilder   | No public API/RSS                               |
+| Robert Half     | Staffing firm, no API/RSS                       |
+| Kijiji          | Classifieds, no API/RSS for jobs                |
+| Snagajob        | US hourly only, no API/RSS                      |
+| Dice            | Tech board, no API/RSS (scraping only)          |
+| Peerlist        | No API/RSS                                      |
+| Comparably      | Match-based, not browseable                     |
+| PeoplePerHour   | Freelance marketplace                           |
+| Contra          | Freelance network                               |
+| Truelancer      | Freelance marketplace                           |
+| Worksome        | Enterprise FMS, not a job board                 |
+| CareerBuilder UK| UK generalist                                   |
+| Jooble France   | French aggregator                               |
+| Remote.com      | HR/payroll platform                             |
+| Hiredly         | Malaysia-focused                                |
+| Remote100K      | $100K+ remote, curated, no API                  |
+| Jobspresso      | Curated remote, no API                          |
+| Dynamite Jobs   | Remote-first, no API                            |
+| RemoteSource    | 100% remote, no API                             |
+| No Visa Jobs    | In hiatus / rebuilding                          |
+| WorldTeams      | LATAM → US, no API                              |
