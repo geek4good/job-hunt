@@ -10,7 +10,7 @@ SCORE_THRESHOLD = "6"
 DB_PATH = "data/jobs.db"
 CV_PATH = "doc/CV-Lucas_Mbiwe.pdf"
 MIN_SALARY_USD = "65000"
-MIN_DAY_RATE_USD = "250"
+MIN_DAY_RATE_USD = "300"
 
 # Tasks
 [tasks.ollama]

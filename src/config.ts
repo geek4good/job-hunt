@@ -30,7 +30,7 @@ export const config = {
   minSalaryUsd: parseInt(env("MIN_SALARY_USD", "65000"), 10),
 
   /** Minimum day rate in USD (for freelance/contract roles). */
-  minDayRateUsd: parseInt(env("MIN_DAY_RATE_USD", "250"), 10),
+  minDayRateUsd: parseInt(env("MIN_DAY_RATE_USD", "300"), 10),
 
   /** Minimum hourly rate in USD (derived from day rate, 8-hour day). */
   get minHourlyRateUsd(): number {
