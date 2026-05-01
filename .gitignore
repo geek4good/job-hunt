@@ -3,4 +3,4 @@ data/*.db
 data/*.db-journal
 .env
 *.log
-doc/CV-Lucas_Mbiwe.pdf
+doc/cv.pdf
