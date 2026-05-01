@@ -36,7 +36,7 @@ export interface Scraper {
   scrape(): Promise<Job[]>;
 }
 
-/** Structured scoring response from Ollama. */
+/** Structured scoring response from GLM. */
 export interface ScoreResult {
   /** 0-10 overall fit score. */
   score: number;

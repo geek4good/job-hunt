@@ -1,4 +1,4 @@
-// src/scorer.ts — Score jobs against the candidate profile using a local Ollama model
+// src/scorer.ts — Score jobs against the candidate profile using GLM (z.ai)
 
 import type { Job, ScoreResult } from "./types";
 import { config } from "./config";
@@ -71,27 +71,23 @@ Set recommend=true only when score >= ${config.scoreThreshold} AND is_remote=tru
 }
 
 // ---------------------------------------------------------------------------
-// Ollama HTTP call
+// GLM (z.ai) HTTP call — OpenAI-compatible API
 // ---------------------------------------------------------------------------
 
-interface OllamaChatResponse {
-  message: { content: string };
+interface ChatResponse {
+  choices: { message: { content: string } }[];
 }
 
 /**
- * Extract the JSON object from Ollama's raw response.
- * Handles  tags, markdown fences, and other noise.
+ * Extract the JSON object from the model's raw response.
+ * Handles thinking tags, markdown fences, and other noise.
  */
 function extractJson(raw: string): string {
-  // Remove all angle-bracket tags and their content (think, thinking, etc.)
   let text = raw.replace(/<[^>]+>[\s\S]*?<\/[^>]+>/g, "");
-  // Remove self-closing tags like 
   text = text.replace(/<\/?think[^>]*\/?>/g, "");
-  // Remove markdown fences
   text = text.replace(/```(?:json)?\s*/gi, "");
   text = text.trim();
 
-  // Find the JSON object boundaries
   const start = text.indexOf("{");
   const end = text.lastIndexOf("}");
   if (start === -1 || end === -1 || end <= start) {
@@ -101,7 +97,7 @@ function extractJson(raw: string): string {
 }
 
 /**
- * Send a job to Ollama for scoring.
+ * Send a job to GLM for scoring.
  * Returns a parsed ScoreResult, or null if the call fails.
  */
 export async function scoreJob(job: Job): Promise<ScoreResult | null> {
@@ -109,48 +105,43 @@ export async function scoreJob(job: Job): Promise<ScoreResult | null> {
   const prompt = buildPrompt(job, profileText);
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 120_000); // 2 min per job
+  const timeout = setTimeout(() => controller.abort(), 120_000);
 
   try {
-    const response = await fetch(`${config.ollamaUrl}/api/chat`, {
+    const response = await fetch(`${config.glmBaseUrl}/chat/completions`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${config.glmApiKey}`,
+      },
       signal: controller.signal,
       body: JSON.stringify({
-        model: config.ollamaModel,
+        model: config.glmModel,
         messages: [
           {
             role: "system",
-            content:
-              "You output only valid JSON. No thinking tags. No markdown fences. No commentary.",
+            content: "You output only valid JSON. No thinking tags. No markdown fences. No commentary.",
           },
           { role: "user", content: prompt },
         ],
-        format: "json",
-        stream: false,
-        options: {
-          temperature: 0.1,
-          // Gemma 4 uses internal reasoning tokens that consume the output budget.
-          // With a long CV + job description as input, 1024 is too tight.
-          // 4096 gives the model room to reason and still emit the JSON.
-          num_predict: 4096,
-        },
+        response_format: { type: "json_object" },
+        temperature: 0.1,
+        max_tokens: 4096,
       }),
     });
 
     if (!response.ok) {
       const body = await response.text();
-      console.error(`\n   ⚠ Ollama error for "${job.title}": ${response.status} ${body}`);
+      console.error(`\n   ⚠ GLM error for "${job.title}": ${response.status} ${body}`);
       return null;
     }
 
-    const data = (await response.json()) as OllamaChatResponse;
-    const content = data.message?.content ?? "";
+    const data = (await response.json()) as ChatResponse;
+    const content = data.choices?.[0]?.message?.content ?? "";
 
     const jsonStr = extractJson(content);
     const parsed = JSON.parse(jsonStr) as ScoreResult;
 
-    // Clamp score to 0-10
     parsed.score = Math.max(0, Math.min(10, parsed.score));
 
     return parsed;
@@ -169,7 +160,7 @@ export async function scoreJob(job: Job): Promise<ScoreResult | null> {
 }
 
 /**
- * Score a batch of jobs sequentially (Ollama handles one request at a time).
+ * Score a batch of jobs sequentially.
  * Returns only jobs that pass the threshold.
  */
 export async function scoreAll(

@@ -4,11 +4,14 @@ const env = (key: string, fallback: string): string =>
   process.env[key] ?? fallback;
 
 export const config = {
-  /** Ollama model name (must be pulled already). */
-  ollamaModel: env("OLLAMA_MODEL", "qwen3:8b"),
+  /** GLM model name (z.ai). */
+  glmModel: env("GLM_MODEL", "glm-4-air"),
 
-  /** Ollama HTTP base URL. */
-  ollamaUrl: env("OLLAMA_URL", "http://localhost:11434"),
+  /** GLM API base URL (OpenAI-compatible). */
+  glmBaseUrl: env("GLM_BASE_URL", "https://open.bigmodel.cn/api/paas/v4"),
+
+  /** GLM API key — set via GLM_API_KEY env var. */
+  glmApiKey: env("GLM_API_KEY", ""),
 
   /**
    * Score threshold (0-10). Jobs scoring >= this value are accepted.

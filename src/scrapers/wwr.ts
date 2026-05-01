@@ -1,47 +1,12 @@
 // src/scrapers/wwr.ts — We Work Remotely RSS scraper
-//
-// Self-contained: owns its URL, fetch logic, parsing, and normalisation.
 
 import { XMLParser } from "fast-xml-parser";
 import type { Job, Scraper } from "../types";
+import { UA, hashUrl, stripHtml } from "./helpers";
 
-// ---------------------------------------------------------------------------
-// Constants
-// ---------------------------------------------------------------------------
-
-/** WWR programming jobs RSS feed. */
 const FEED_URL =
   "https://weworkremotely.com/categories/remote-programming-jobs.rss";
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
-/** Deterministic hex ID from a URL, using Bun's fast SHA-256. */
-function hashUrl(url: string): string {
-  const hasher = new Bun.CryptoHasher("sha256");
-  hasher.update(url);
-  return hasher.digest("hex").slice(0, 16);
-}
-
-/** Strip HTML tags and decode common entities to plain text. */
-function stripHtml(html: string): string {
-  return html
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<\/p>/gi, "\n")
-    .replace(/<\/li>/gi, "\n")
-    .replace(/<[^>]+>/g, "")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&#39;/g, "'")
-    .replace(/&quot;/g, '"')
-    .replace(/\n{3,}/g, "\n\n")
-    .trim();
-}
-
-/** Parse "Company: Job Title" format used by WWR. */
 function parseTitle(raw: string): { company: string; title: string } {
   const idx = raw.indexOf(":");
   if (idx === -1) return { company: "Unknown", title: raw };
@@ -51,19 +16,13 @@ function parseTitle(raw: string): { company: string; title: string } {
   };
 }
 
-// ---------------------------------------------------------------------------
-// Scraper
-// ---------------------------------------------------------------------------
-
 export const wwr: Scraper = {
   name: "We Work Remotely",
 
   async scrape(): Promise<Job[]> {
     console.log(`📡 [${this.name}] Fetching: ${FEED_URL}`);
 
-    const response = await fetch(FEED_URL, {
-      headers: { "User-Agent": "job-hunt-agent/1.0" },
-    });
+    const response = await fetch(FEED_URL, { headers: UA });
 
     if (!response.ok) {
       throw new Error(

@@ -14,10 +14,76 @@ import { preFilter } from "./prefilter";
 // Scrapers — add new sources here
 // ---------------------------------------------------------------------------
 
+// --- Working scrapers (registered below) ---
 import { wwr } from "./scrapers/wwr";
+import { remoteok } from "./scrapers/remoteok";
+import { remotive } from "./scrapers/remotive";
+import { jobicy } from "./scrapers/jobicy";
+import { workingnomads } from "./scrapers/workingnomads";
+import { hnWhoIsHiring } from "./scrapers/hn-whoishiring";
+import { euremotejobs } from "./scrapers/euremotejobs";
+import { jobspresso } from "./scrapers/jobspresso";
+
+// --- Needs LPD_TOKEN (Lightpanda) to yield job data ---
+// import { dynamitejobs } from "./scrapers/dynamitejobs";   // Vue/Pinia SPA
+// import { justremote } from "./scrapers/justremote";       // React SPA
+// import { remotesource } from "./scrapers/remotesource";   // React SSR streaming
+// import { remote100k } from "./scrapers/remote100k";       // Framer site
+// import { peerlist } from "./scrapers/peerlist";           // SPA (tiny initial HTML)
+// import { dice } from "./scrapers/dice";                   // SPA
+// import { flexjobs } from "./scrapers/flexjobs";           // Paywall + SPA
+// import { peopleperhour } from "./scrapers/peopleperhour"; // GTM-based SPA
+// import { contra } from "./scrapers/contra";               // Vike SPA
+// import { truelancer } from "./scrapers/truelancer";       // Next.js SPA
+
+// --- Needs API credentials ---
+// import { careerjet } from "./scrapers/careerjet";   // TODO: CAREERJET_API_KEY (free at careerjet.com/partners)
+// import { wttj } from "./scrapers/wttj";             // TODO: WTTJ_API_TOKEN (request at welcomekit.co)
+// import { upwork } from "./scrapers/upwork";         // TODO: UPWORK_CLIENT_ID + UPWORK_CLIENT_SECRET (OAuth)
+// import { glassdoor } from "./scrapers/glassdoor";   // TODO: GLASSDOOR_PARTNER_ID + GLASSDOOR_KEY
+// import { monster } from "./scrapers/monster";       // TODO: MONSTER_PARTNER_KEY
+// import { indeed } from "./scrapers/indeed";         // TODO: INDEED_PUBLISHER_ID
+
+// --- Anti-bot / login wall — cannot be scraped ---
+// import { linkedin } from "./scrapers/linkedin";           // HTTP 999 + login wall
+// import { simplyhired } from "./scrapers/simplyhired";     // CAPTCHA / bot detection
+// import { careerbuilder } from "./scrapers/careerbuilder"; // Anti-bot
+
+// --- Site down / rebuilding ---
+// import { himalayas } from "./scrapers/himalayas";   // HTTP 404 as of 2026-05-01
+// import { novisajobs } from "./scrapers/novisajobs"; // Site rebuilding (empty SPA shell)
+
+// --- Canada-only / low-relevance (not registered) ---
+// import { eluta } from "./scrapers/eluta";           // XML API, Canada-only, may require registration
+// import { jobbank } from "./scrapers/jobbank";       // RSS, Canada govt jobs only
+
+// --- Low-relevance stubs (not registered) ---
+// import { roberthalf } from "./scrapers/roberthalf";         // Staffing firm, no API
+// import { comparably } from "./scrapers/comparably";         // Match-based, no API
+// import { worksome } from "./scrapers/worksome";             // Enterprise FMS, no API
+// import { remotecom } from "./scrapers/remotecom";           // HR platform, no API
+// import { worldteams } from "./scrapers/worldteams";         // LATAM→US niche
+// import { talentegg } from "./scrapers/talentegg";           // Canada students only
+// import { talentcom } from "./scrapers/talentcom";           // Generalist, no API
+// import { kijiji } from "./scrapers/kijiji";                 // Classifieds, no jobs API
+// import { snagajob } from "./scrapers/snagajob";             // US hourly/shift work
+// import { jobboom } from "./scrapers/jobboom";               // Québec French only
+// import { jobilico } from "./scrapers/jobilico";             // Employer API only
+// import { hiredly } from "./scrapers/hiredly";               // Malaysia market
+// import { careerbuilderuk } from "./scrapers/careerbuilderuk"; // UK generalist, no API
+// import { jooblefr } from "./scrapers/jooblefr";             // French aggregator, no API
 
 /** Each scraper is self-contained. Add a new import + entry to extend. */
-const scrapers: Scraper[] = [wwr];
+const scrapers: Scraper[] = [
+  wwr,
+  remoteok,
+  remotive,
+  jobicy,
+  workingnomads,
+  hnWhoIsHiring,
+  euremotejobs,
+  jobspresso,
+];
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -27,7 +93,7 @@ function banner(): void {
   const scraperNames = scrapers.map((s) => s.name).join(", ");
   console.log("\n🔍 job-hunt agent v1.0");
   console.log(`   Scrapers:   ${scraperNames}`);
-  console.log(`   Model:      ${config.ollamaModel}`);
+  console.log(`   Model:      ${config.glmModel} (z.ai)`);
   console.log(`   Threshold:  ${config.scoreThreshold}/10`);
   console.log(`   Min salary: $${config.minSalaryUsd.toLocaleString()}/yr  |  Min day rate: $${config.minDayRateUsd}/day (~$${config.minHourlyRateUsd}/hr)\n`);
 }
@@ -104,7 +170,7 @@ async function main(): Promise<void> {
       return;
     }
 
-    // 3. Pre-filter: skip obvious non-matches in code (saves Ollama calls)
+    // 3. Pre-filter: skip obvious non-matches in code (saves GLM calls)
     const candidates: typeof newJobs = [];
     const rejected: { job: (typeof newJobs)[number]; reason: string }[] = [];
 
@@ -133,8 +199,8 @@ async function main(): Promise<void> {
       return;
     }
 
-    // 4. Score remaining candidates with Ollama
-    console.log(`🤖 Scoring ${candidates.length} candidates via Ollama...\n`);
+    // 4. Score remaining candidates with GLM
+    console.log(`🤖 Scoring ${candidates.length} candidates via GLM...\n`);
     const accepted = await scoreAll(candidates, config.scoreThreshold);
 
     // 5. Record all jobs for dedup

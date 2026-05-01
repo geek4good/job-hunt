@@ -1,6 +1,6 @@
-// src/prefilter.ts — Hard-filter jobs in code before sending to Ollama
+// src/prefilter.ts — Hard-filter jobs in code before sending to GLM
 //
-// This saves Ollama calls and catches obvious mismatches that smaller
+// This saves GLM calls and catches obvious mismatches that smaller
 // models might miss (e.g. "Electrical Design Lead" scored as fullstack).
 
 import type { Job } from "./types";
