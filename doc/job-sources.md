@@ -497,57 +497,66 @@ RSS exists but is primarily an embed widget. Unclean feed.
 
 ## Integration Difficulty Summary
 
-### Has Feed / API — Candidates for Agent Integration
+> **Note:** Scraping is a valid approach. Sources marked "scrape" below can be
+> integrated by fetching and parsing their HTML job listing pages. This is more
+> fragile than API/RSS (breaks on site redesigns) but opens up many more sources.
 
-| Priority     | Source                    | Difficulty | Feed Type           | Notes                                       |
-| ------------ | ------------------------- | ---------- | ------------------- | ------------------------------------------- |
-| ✅ Done       | WWR                       | —          | RSS                 | Already integrated                          |
-| 🟢 Easy      | RemoteOK                  | Easy       | JSON API + RSS      | No auth, high volume                        |
-| 🟢 Easy      | Remotive                  | Easy       | JSON API + XML      | No auth                                     |
-| 🟢 Easy      | Himalayas                 | Easy       | JSON API + RSS      | No auth, excellent docs, searchable         |
-| 🟢 Easy      | Jobicy                    | Easy       | JSON API + RSS      | No auth, filterable                         |
-| 🟡 Medium    | Working Nomads            | Medium     | JSON API (POST)     | Requires POST request                       |
-| 🟡 Medium    | Upwork                    | Medium     | GraphQL API + RSS   | Requires OAuth, freelance only              |
-| 🟡 Medium    | Careerjet                 | Medium     | REST API (JSON/XML) | Free API key required                       |
-| 🟡 Medium    | Welcome to the Jungle     | Medium     | REST API            | Requires auth token (request form)          |
-| 🔴 Hard      | HN Who's Hiring           | Hard       | None (Algolia API)  | Comment parsing required                    |
-| 🔴 Hard      | JustRemote                | Hard       | None                | Scraping only                               |
-| 🔴 Hard      | Europe Remotely           | Hard       | Unclean RSS         | Widget-embedded feed                        |
+### Candidates for Agent Integration
 
-### No Feed / Low Relevance
+| Priority   | Source                  | Method             | Difficulty | Notes                                         |
+| ---------- | ----------------------- | ------------------ | ---------- | --------------------------------------------- |
+| ✅ Done     | WWR                     | RSS                | —          | Already integrated                            |
+| 🟢 Easy    | RemoteOK                | JSON API + RSS     | Easy       | No auth, high volume                          |
+| 🟢 Easy    | Remotive                | JSON API + XML     | Easy       | No auth                                       |
+| 🟢 Easy    | Himalayas               | JSON API + RSS     | Easy       | No auth, excellent docs, searchable           |
+| 🟢 Easy    | Jobicy                  | JSON API + RSS     | Easy       | No auth, filterable                           |
+| 🟡 Medium  | Working Nomads          | JSON API (POST)    | Medium     | Requires POST request                         |
+| 🟡 Medium  | Careerjet               | REST API (JSON/XML)| Medium     | Free API key required                         |
+| 🟡 Medium  | Welcome to the Jungle   | REST API           | Medium     | Requires auth token (request form)            |
+| 🟡 Medium  | Upwork                  | GraphQL API + RSS  | Medium     | Requires OAuth, freelance only                |
+| 🟡 Medium  | Remote100K              | Scrape             | Medium     | $100K+ remote jobs, clean listing pages       |
+| 🟡 Medium  | Jobspresso              | Scrape             | Medium     | Curated remote, simple HTML structure         |
+| 🟡 Medium  | Dynamite Jobs           | Scrape             | Medium     | Remote-first, clean listing pages             |
+| 🟡 Medium  | JustRemote              | Scrape             | Medium     | Remote tech jobs, browseable listing pages    |
+| 🟡 Medium  | RemoteSource            | Scrape             | Medium     | 100% remote, clean listing pages              |
+| 🟡 Medium  | No Visa Jobs            | Scrape             | Medium     | No visa requirement, may still be rebuilding  |
+| 🟡 Medium  | Dice                    | Scrape             | Medium     | Tech-focused, good for backend roles          |
+| 🟡 Medium  | FlexJobs                | Scrape             | Medium     | Paywall may block; high-quality remote roles  |
+| 🟡 Medium  | Peerlist                | Scrape             | Medium     | Startup/remote jobs, clean pages              |
+| 🔴 Hard    | HN Who's Hiring         | Scrape (Algolia)   | Hard       | Comment parsing required, monthly thread      |
+| 🔴 Hard    | Indeed                  | Scrape             | Hard       | Aggressive anti-bot, high volume              |
+| 🔴 Hard    | Glassdoor               | Scrape             | Hard       | Anti-bot, login wall                          |
+| 🔴 Hard    | Monster                 | Scrape             | Hard       | Anti-bot measures                             |
+| 🔴 Hard    | LinkedIn Jobs           | Scrape             | Hard       | Aggressive anti-bot, login wall               |
+| 🔴 Hard    | SimplyHired             | Scrape             | Hard       | Anti-bot measures                             |
+| 🔴 Hard    | CareerBuilder           | Scrape             | Hard       | Anti-bot measures                             |
+| 🔴 Hard    | Europe Remotely         | Scrape             | Hard       | Unclean feed, small volume                    |
 
-| Source          | Notes                                           |
+### Low Relevance for Our Use Case
+
+These are either defunct, not remote-focused, geographically restricted, or
+not engineering roles. Included for completeness but not recommended for the
+job-hunt agent.
+
+| Source          | Reason to skip                                  |
 | --------------- | ----------------------------------------------- |
-| Indeed          | Partner API only (GraphQL), not remote-focused  |
-| Glassdoor       | Partner API only, requires key                  |
-| Workopolis      | **Shut down** — acquired by Indeed (2018)       |
-| Eluta.ca        | XML API, Canada-only, not remote-focused        |
-| JobBank Canada  | RSS exists, Canada-only, not remote-focused     |
-| Monster         | Partner API, RSS last 24h only                  |
-| SimplyHired     | No public API (via Techmap only)                |
-| Jobboom         | Québec-only, no API                             |
-| Jobilico        | Employer API only, not remote-focused           |
-| FlexJobs        | Paywall, no API/RSS                             |
-| Talent.com      | No public API/RSS                               |
-| TalentEgg       | Canada students/grads, no API                   |
-| CareerBuilder   | No public API/RSS                               |
-| Robert Half     | Staffing firm, no API/RSS                       |
-| Kijiji          | Classifieds, no API/RSS for jobs                |
-| Snagajob        | US hourly only, no API/RSS                      |
-| Dice            | Tech board, no API/RSS (scraping only)          |
-| Peerlist        | No API/RSS                                      |
+| Workopolis      | **Defunct** — acquired by Indeed (2018)         |
+| Eluta.ca        | Canada-only, not remote-focused                 |
+| JobBank Canada  | Canada-only, not remote-focused                 |
+| Jobboom         | Québec-only, French-language                    |
+| Jobilico        | Employer-facing API only, not remote-focused    |
+| Talent.com      | Generalist, not remote-focused                  |
+| TalentEgg       | Canada students/grads only                      |
+| Robert Half     | Staffing firm placements, not remote-focused    |
+| Kijiji          | Classifieds, not remote-focused                 |
+| Snagajob        | US hourly/part-time only                        |
 | Comparably      | Match-based, not browseable                     |
-| PeoplePerHour   | Freelance marketplace                           |
-| Contra          | Freelance network                               |
-| Truelancer      | Freelance marketplace                           |
+| PeoplePerHour   | Freelance marketplace, not full-time roles      |
+| Contra          | Freelance network, not full-time roles          |
+| Truelancer      | Freelance marketplace, not full-time roles      |
 | Worksome        | Enterprise FMS, not a job board                 |
-| CareerBuilder UK| UK generalist                                   |
-| Jooble France   | French aggregator                               |
-| Remote.com      | HR/payroll platform                             |
-| Hiredly         | Malaysia-focused                                |
-| Remote100K      | $100K+ remote, curated, no API                  |
-| Jobspresso      | Curated remote, no API                          |
-| Dynamite Jobs   | Remote-first, no API                            |
-| RemoteSource    | 100% remote, no API                             |
-| No Visa Jobs    | In hiatus / rebuilding                          |
-| WorldTeams      | LATAM → US, no API                              |
+| CareerBuilder UK| UK generalist, not remote-focused               |
+| Jooble France   | French aggregator, not remote-focused           |
+| Remote.com      | HR/payroll platform, not a job board            |
+| Hiredly         | Malaysia-focused, not remote-focused            |
+| WorldTeams      | LATAM → US outsourcing, specific model          |
