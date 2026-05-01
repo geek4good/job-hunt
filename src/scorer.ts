@@ -14,10 +14,15 @@ function buildPrompt(job: Job, profileText: string): string {
 CANDIDATE PROFILE:
 ${profileText}
 
+IMPORTANT: This candidate PREFERS freelance/contract work over full-time salaried roles. Freelance and contract gigs are a POSITIVE signal, not a negative one. However, full-time roles are still acceptable if compensation is good.
+
 SCORING CRITERIA (total 0-10):
 1. Remote work (HARD FILTER): Must be fully remote. If on-site or hybrid-only, score 0 overall and set recommend=false.
 2. Location availability (0-2): Prefer roles available from Thailand. Spain is also acceptable. "Anywhere" or "Worldwide" = full 2 points. US-only or restricted = 0 points.
-3. Compensation (0-2): Minimum $${config.minSalaryUsd.toLocaleString()} USD/year. If explicitly stated below threshold, score 0 overall. If not stated, assume it might meet threshold and give 1 point.
+3. Compensation (0-2):
+   - For full-time roles: Minimum $${config.minSalaryUsd.toLocaleString()} USD/year. If explicitly stated below threshold, score 0 overall. If not stated, assume it might meet threshold and give 1 point.
+   - For freelance/contract: Minimum $${config.minDayRateUsd}/day (~$${config.minHourlyRateUsd}/hr). If explicitly stated below threshold, score 0 overall. If not stated, assume it might meet threshold and give 1 point.
+   - Freelance/contract rates that meet or exceed the threshold get the same or higher score as full-time.
 4. Role type (0-3): This criterion measures how close the role is to HANDS-ON SOFTWARE ENGINEERING.
    - backend developer/engineer: 3
    - full-stack developer/engineer: 2.5
@@ -30,8 +35,13 @@ SCORING CRITERIA (total 0-10):
    - product marketing manager: 0. Set recommend=false.
    - non-software roles (electrical, mechanical, etc.): 0. Set recommend=false.
    IMPORTANT: If the role is NOT a software engineering role (writing code), set role_type to "other" and score this criterion 0. Set recommend=false.
-5. Stack match (0-2): TypeScript, Ruby on Rails, Node.js, Bun, AWS, Cloudflare, DevOps, system design, APIs, distributed systems, leadership. Award 0.5 points per matched technology, max 2.
-6. Seniority (0-1): Senior or lead = 1. Mid-level = 0.5 (acceptable if pay is high enough). Junior = 0.
+5. Engagement type bonus (0-1): This measures how well the engagement type fits the candidate's preference.
+   - freelance/contract: 1 (preferred)
+   - full-time/permanent: 0.5 (acceptable)
+   - internship/apprenticeship: 0
+   - unspecified: 0.5
+6. Stack match (0-2): TypeScript, Ruby on Rails, Node.js, Bun, AWS, Cloudflare, DevOps, system design, APIs, distributed systems, leadership. Award 0.5 points per matched technology, max 2.
+7. Seniority (0-1): Senior or lead = 1. Mid-level = 0.5 (acceptable if pay is high enough). Junior = 0.
 
 JOB LISTING:
 Title: ${job.title}
@@ -49,6 +59,7 @@ Respond with ONLY valid JSON matching this exact schema (no markdown, no comment
   "salary_mentions": "string or null",
   "salary_meets_threshold": boolean | null,
   "role_type": "backend" | "frontend" | "fullstack" | "devops" | "management" | "other",
+  "engagement_type": "fulltime" | "freelance" | "contract" | "parttime" | "unknown",
   "stack_match": ["matched technology 1", "matched technology 2"],
   "seniority": "junior" | "mid" | "senior" | "lead" | "unknown",
   "score": number,

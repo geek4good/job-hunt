@@ -5,6 +5,7 @@ import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import { config } from "./config";
 import type { Job, Scraper } from "./types";
+import type { ScoreResult } from "./types";
 import { closeDb, filterNew, getSeenIds, openDb, recordJob } from "./dedup";
 import { scoreAll } from "./scorer";
 import { preFilter } from "./prefilter";
@@ -28,14 +29,11 @@ function banner(): void {
   console.log(`   Scrapers:   ${scraperNames}`);
   console.log(`   Model:      ${config.ollamaModel}`);
   console.log(`   Threshold:  ${config.scoreThreshold}/10`);
-  console.log(`   Min salary: $${config.minSalaryUsd.toLocaleString()}/yr\n`);
+  console.log(`   Min salary: $${config.minSalaryUsd.toLocaleString()}/yr  |  Min day rate: $${config.minDayRateUsd}/day (~$${config.minHourlyRateUsd}/hr)\n`);
 }
 
 function printAccepted(
-  results: {
-    job: (typeof results)[number]["job"];
-    result: (typeof results)[number]["result"];
-  }[],
+  results: { job: Job; result: ScoreResult }[],
 ): void {
   if (results.length === 0) {
     console.log("\n📭 No new jobs matched your criteria this run.\n");
@@ -50,7 +48,7 @@ function printAccepted(
     console.log(`
 ┌──────────────────────────────────────────────────────────────────────
 │ ${job.company} — ${job.title}
-│ Score: ${result.score}/10  |  ${result.role_type}  |  ${result.seniority}
+│ Score: ${result.score}/10  |  ${result.role_type}  |  ${result.seniority}  |  ${result.engagement_type ?? "unknown"}
 │ Location fit: ${result.location_fit}  |  Remote: ${result.is_remote}
 │ Salary: ${result.salary_mentions ?? "not stated"} (meets threshold: ${result.salary_meets_threshold ?? "unknown"})
 │ Stack: ${result.stack_match.join(", ") || "none matched"}

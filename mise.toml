@@ -9,11 +9,17 @@ OLLAMA_URL = "http://localhost:11434"
 SCORE_THRESHOLD = "6"
 DB_PATH = "data/jobs.db"
 CV_PATH = "doc/CV-Lucas_Mbiwe.pdf"
-MIN_SALARY_USD = "75000"
+MIN_SALARY_USD = "65000"
+MIN_DAY_RATE_USD = "250"
 
 # Tasks
-[tasks.start]
+[tasks.ollama]
+description = "Ensure Ollama server is running and model is pulled"
+run = "tasks/ollama"
+
+[tasks.hunt]
 description = "Run the job-hunt agent"
+depends = ["ollama"]
 run = "bun run src/main.ts"
 
 [tasks.reset]

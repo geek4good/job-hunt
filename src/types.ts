@@ -58,6 +58,13 @@ export interface ScoreResult {
     | "devops"
     | "management"
     | "other";
+  /** Detected engagement type. */
+  engagement_type:
+    | "fulltime"
+    | "freelance"
+    | "contract"
+    | "parttime"
+    | "unknown";
   /** Technologies from the listing that match the candidate's stack. */
   stack_match: string[];
   /** Detected seniority level. */

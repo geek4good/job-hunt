@@ -26,6 +26,14 @@ export const config = {
   /** Path to the candidate's CV (PDF). */
   cvPath: env("CV_PATH", "doc/CV-Lucas_Mbiwe.pdf"),
 
-  /** Minimum annual salary in USD before tax. */
-  minSalaryUsd: parseInt(env("MIN_SALARY_USD", "75000"), 10),
+  /** Minimum annual salary in USD before tax (for full-time roles). */
+  minSalaryUsd: parseInt(env("MIN_SALARY_USD", "65000"), 10),
+
+  /** Minimum day rate in USD (for freelance/contract roles). */
+  minDayRateUsd: parseInt(env("MIN_DAY_RATE_USD", "250"), 10),
+
+  /** Minimum hourly rate in USD (derived from day rate, 8-hour day). */
+  get minHourlyRateUsd(): number {
+    return Math.round(this.minDayRateUsd / 8 * 100) / 100;
+  },
 } as const;
