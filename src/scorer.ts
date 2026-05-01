@@ -119,7 +119,10 @@ export async function scoreJob(job: Job): Promise<ScoreResult | null> {
         stream: false,
         options: {
           temperature: 0.1,
-          num_predict: 1024,
+          // Gemma 4 uses internal reasoning tokens that consume the output budget.
+          // With a long CV + job description as input, 1024 is too tight.
+          // 4096 gives the model room to reason and still emit the JSON.
+          num_predict: 4096,
         },
       }),
     });
