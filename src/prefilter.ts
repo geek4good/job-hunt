@@ -53,6 +53,36 @@ const FRONTEND_ONLY_PATTERNS = [
   /\bfrontend\b.*\b(?:only|specialist)\b/i,
 ];
 
+/**
+ * Location restriction patterns that clearly exclude both Thailand and Spain.
+ * Checked against title + region + first 500 chars of description.
+ * EU/Europe/EMEA/APAC are intentionally NOT listed — Spain is in Europe, Thailand is in APAC.
+ */
+const LOCATION_EXCLUSION_PATTERNS = [
+  // US-only
+  /\b(?:us|u\.s\.?|usa|united\s+states?)\s*[-–)]?\s*only\b/i,
+  /\bremote\s*[-–(]\s*(?:us|u\.s\.?|usa|united\s+states?)[\s)–-]/i,
+  /\bremote\s+in\s+(?:the\s+)?(?:us|u\.s\.?|usa|united\s+states?)\b/i,
+  /\bmust\s+(?:be\s+)?(?:located?|resid\w+|based|living?)\s+in\s+(?:the\s+)?(?:us|u\.s\.?|usa|united\s+states?)\b/i,
+  /\bauthori[sz]ed\s+to\s+work\s+in\s+(?:the\s+)?(?:us|u\.s\.?|usa|united\s+states?)\b/i,
+  // US timezone anchors (implies US-only)
+  /\b(?:must\s+(?:be\s+)?(?:available|work)\s+(?:in\s+)?)?(?:et|ct|mt|pt|est|cst|mst|pst)\s+(?:hours?|timezone|time\s*zone)\s+required\b/i,
+  // North America / US + Canada
+  /\bnorth\s+america[n]?\s+only\b/i,
+  /\bremote\s*[-–(]?\s*(?:us|usa?)\s*[&+/]\s*can(?:ada)?\b/i,
+  /\bremote\s*[-–(]?\s*can(?:ada)?\s*[&+/]\s*(?:us|usa?)\b/i,
+  /\bopen\s+to\s+(?:us|usa?)\s*[&+/]\s*can(?:ada)?\s+(?:residents?|candidates?|applicants?)\b/i,
+  // Canada-only
+  /\bcanada\s+only\b/i,
+  /\bremote\s+in\s+canada\b/i,
+  // UK-only
+  /\b(?:uk|u\.k\.|united\s+kingdom)\s+only\b/i,
+  /\bremote\s+in\s+(?:the\s+)?(?:uk|u\.k\.|united\s+kingdom)\b/i,
+  // Australia-only
+  /\baustralia[n]?\s+only\b/i,
+  /\bremote\s+in\s+australia\b/i,
+];
+
 /** Category values from WWR that are not engineering. */
 const NON_ENGINEERING_CATEGORIES = [
   "Design",
@@ -98,7 +128,15 @@ export function preFilter(job: Job): { pass: true } | { pass: false; reason: str
     }
   }
 
-  // 4. Reject predominantly-PHP stacks: PHP mentioned 3+ times with no preferred stack present
+  // 4. Reject location-restricted roles that exclude Thailand and Spain
+  const locationText = `${job.title} ${job.region} ${job.description.slice(0, 500)}`;
+  for (const pattern of LOCATION_EXCLUSION_PATTERNS) {
+    if (pattern.test(locationText)) {
+      return { pass: false, reason: `location restricted: matched ${pattern.source}` };
+    }
+  }
+
+  // 5. Reject predominantly-PHP stacks: PHP mentioned 3+ times with no preferred stack present
   const desc = job.description.toLowerCase();
   const phpCount = (desc.match(/\bphp\b/g) ?? []).length;
   const hasPreferredStack = /\b(?:typescript|node\.?js|ruby|rails|rust|golang|python|java|kotlin|scala|bun|aws|cloudflare)\b/i.test(desc);
