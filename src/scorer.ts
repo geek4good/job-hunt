@@ -1,8 +1,10 @@
 // src/scorer.ts — Score jobs against the candidate profile using GLM (z.ai)
 
+import type { Database } from "bun:sqlite";
 import type { Job, ScoreResult } from "./types";
 import { config } from "./config";
 import { loadProfile } from "./profile";
+import { recordJob } from "./dedup";
 
 // ---------------------------------------------------------------------------
 // Prompt construction
@@ -160,12 +162,14 @@ export async function scoreJob(job: Job): Promise<ScoreResult | null> {
 }
 
 /**
- * Score a batch of jobs sequentially.
+ * Score a batch of jobs sequentially, recording each result to SQLite immediately
+ * so progress is preserved if the run is interrupted.
  * Returns only jobs that pass the threshold.
  */
 export async function scoreAll(
   jobs: Job[],
   threshold: number,
+  db: Database,
 ): Promise<{ job: Job; result: ScoreResult }[]> {
   const accepted: { job: Job; result: ScoreResult }[] = [];
 
@@ -184,12 +188,15 @@ export async function scoreAll(
       continue;
     }
 
-    const emoji = result.recommend ? "✅" : "❌";
+    const isAccepted = result.recommend && result.score >= threshold;
+    recordJob(db, job, result.score, isAccepted);
+
+    const emoji = isAccepted ? "✅" : "❌";
     console.log(
       `${emoji} score=${result.score} (${result.role_type}, ${result.seniority})`,
     );
 
-    if (result.recommend && result.score >= threshold) {
+    if (isAccepted) {
       accepted.push({ job, result });
     }
   }

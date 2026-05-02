@@ -33,6 +33,10 @@ const NON_ENGINEERING_PATTERNS = [
   /\bui\s+design/i,
   /\bcontent\s+design/i,
   /\bvisual\s+design/i,
+  /\bdevops\b/i,
+  /\bphp\s+(?:dev|eng|developer|engineer)/i,
+  /\blaravel\s+(?:dev|eng|developer|engineer)/i,
+  /\bwordpress\s+(?:dev|eng|developer|engineer)/i,
 ];
 
 /** Title patterns that indicate pure front-end (not a fit). */
@@ -92,6 +96,14 @@ export function preFilter(job: Job): { pass: true } | { pass: false; reason: str
     if (pattern.test(job.title)) {
       return { pass: false, reason: `pure frontend role: matched ${pattern.source}` };
     }
+  }
+
+  // 4. Reject predominantly-PHP stacks: PHP mentioned 3+ times with no preferred stack present
+  const desc = job.description.toLowerCase();
+  const phpCount = (desc.match(/\bphp\b/g) ?? []).length;
+  const hasPreferredStack = /\b(?:typescript|node\.?js|ruby|rails|rust|golang|python|java|kotlin|scala|bun|aws|cloudflare)\b/i.test(desc);
+  if (phpCount >= 3 && !hasPreferredStack) {
+    return { pass: false, reason: "predominantly PHP stack" };
   }
 
   return { pass: true };

@@ -98,6 +98,11 @@ function banner(): void {
   console.log(`   Min salary: $${config.minSalaryUsd.toLocaleString()}/yr  |  Min day rate: $${config.minDayRateUsd}/day (~$${config.minHourlyRateUsd}/hr)\n`);
 }
 
+function formatDate(iso: string): string {
+  const d = new Date(iso);
+  return isNaN(d.getTime()) ? "unknown" : d.toISOString().slice(0, 10);
+}
+
 function printAccepted(
   results: { job: Job; result: ScoreResult }[],
 ): void {
@@ -115,7 +120,7 @@ function printAccepted(
 ┌──────────────────────────────────────────────────────────────────────
 │ ${job.company} — ${job.title}
 │ Score: ${result.score}/10  |  ${result.role_type}  |  ${result.seniority}  |  ${result.engagement_type ?? "unknown"}
-│ Location fit: ${result.location_fit}  |  Remote: ${result.is_remote}
+│ Location fit: ${result.location_fit}  |  Remote: ${result.is_remote}  |  Posted: ${formatDate(job.publishedAt)}
 │ Salary: ${result.salary_mentions ?? "not stated"} (meets threshold: ${result.salary_meets_threshold ?? "unknown"})
 │ Stack: ${result.stack_match.join(", ") || "none matched"}
 │ Reason: ${result.reason}
@@ -183,6 +188,11 @@ async function main(): Promise<void> {
       }
     }
 
+    // Record pre-filtered jobs immediately so they're skipped on resume
+    for (const { job } of rejected) {
+      recordJob(db, job, 0, false);
+    }
+
     if (rejected.length > 0) {
       console.log(`   🚫 Pre-filtered out ${rejected.length} jobs:`);
       for (const { job, reason } of rejected) {
@@ -193,31 +203,13 @@ async function main(): Promise<void> {
 
     if (candidates.length === 0) {
       console.log("📭 No candidates after pre-filtering.\n");
-      for (const { job } of rejected) {
-        recordJob(db, job, 0, false);
-      }
       return;
     }
 
-    // 4. Score remaining candidates with GLM
+    // 4. Score remaining candidates with GLM (each job recorded to SQLite immediately)
     console.log(`🤖 Scoring ${candidates.length} candidates via GLM...\n`);
-    const accepted = await scoreAll(candidates, config.scoreThreshold);
+    const accepted = await scoreAll(candidates, config.scoreThreshold, db);
 
-    // 5. Record all jobs for dedup
-    for (const { job, result } of accepted) {
-      recordJob(db, job, result.score, true);
-    }
-    for (const { job } of rejected) {
-      recordJob(db, job, 0, false);
-    }
-    const acceptedIds = new Set(accepted.map((a) => a.job.id));
-    for (const job of candidates) {
-      if (!acceptedIds.has(job.id)) {
-        recordJob(db, job, 0, false);
-      }
-    }
-
-    // 6. Print results
     printAccepted(accepted);
 
     console.log(
